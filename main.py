@@ -39,10 +39,7 @@ Avoid:  {{avoid_items}}
 Context: Additional context can be quite long, and it's best to dump it at the end.
 """
 
-chat_history = [
-    {"role": "system", "content": system_prompt},
-]
-
+chat_history = [{"role": "system", "content": system_prompt}]
 
 @app.route("/", methods=["GET"])
 def index():
@@ -57,27 +54,23 @@ def analyze():
     dinner_prompt = request.form.get("dinner")
     snack_prompt = request.form.get("snacks")
 
-    breakfast_info = "Breakfast: " + breakfast_prompt
-    lunch_info = "Lunch: " + lunch_prompt
-    dinner_info = "Dinner: " + dinner_prompt
-
     user_prompt = (
-        "Entire Day = "
-        + info_prompt
-        + breakfast_info
-        + lunch_info
-        + dinner_info
+        f"User Info: {info_prompt}\n"
+        f"Breakfast: {breakfast_prompt}\n"
+        f"Lunch: {lunch_prompt}\n"
+        f"Dinner: {dinner_prompt}\n"
+        f"Snacks: {snack_prompt}\n"
+        f"Please analyze this full day of eating and give recommendations."
     )
 
-    chat_history.append({"role": "system", "content": user_prompt})
+    chat_history.append({"role": "user", "content": user_prompt})
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=chat_history
     )
 
     assistant_response = response.choices[0].message.content
-
     chat_history.append({"role": "assistant", "content": assistant_response})
 
     return jsonify({"response": assistant_response})

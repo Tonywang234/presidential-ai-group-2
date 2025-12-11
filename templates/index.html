@@ -1,100 +1,239 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrition Advisor</title>
+
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom right, #eef2ff, #d9e8ff);
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding-top: 40px;
-        }
-    
-        .container {
-            background: white;
-            width: 90%;
-            max-width: 500px;
-            padding: 20px 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-    
-        h2 {
-            text-align: center;
-            margin-top: 0;
-            font-weight: 600;
-        }
-    
-        label {
-            font-weight: bold;
-            display: block;
-            margin-top: 15px;
-        }
-    
+
         input {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #2a2f3b;
+            background: #1a1d25;   /* darker background */
+            color: #e5e7eb;
+            outline: none;
         }
-    
-        button {
-            margin-top: 20px;
+
+        /* Keep dark theme when the user clicks or types */
+        input:focus {
+            background: #1a1d25;
+            border-color: #4f7cff; /* optional blue glow like your output box */
+            box-shadow: 0 0 6px rgba(79, 124, 255, 0.4); /* optional */
+            color: #fff;
+        }
+
+        
+
+        /* Global dark theme */
+        body {
+            margin: 0;
+            background: #0f1117;
+            color: #e5e7eb;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        /* Navigation bar */
+        .navbar {
             width: 100%;
-            padding: 10px;
-            background: #4f7cff;
+            background: #0c0e14;
+            padding: 14px 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            margin-left: 20px;
+            color: #ffffffc7;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Hero section text */
+        .hero {
+            max-width: 900px;
+            margin: 50px auto 20px auto;
+            padding: 0 25px;
+        }
+
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            color: #a1a5b3;
+            font-size: 18px;
+            margin-top: 0;
+        }
+
+        /* Card layout */
+        .cards {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 25px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #151820;
+            flex: 1;
+            min-width: 320px;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: #a1a5b3;
+        }
+
+        .card button {
+            margin-top: 18px;
+            padding: 10px 18px;
+            background: #ff4f7b;
             border: none;
             color: white;
-            font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
         }
-    
-        button:hover {
-            background: #3d63d9;
+
+        .card button:hover {
+            background: #ff335f;
         }
-    
+
+        /* Form container */
+        .form-container {
+            max-width: 900px;
+            background: #151820;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+        }
+
+        label {
+            display: block;
+            margin-top: 16px;
+            margin-bottom: 6px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #2a2f3b;
+            background: #0f1117;
+            color: #e5e7eb;
+        }
+
+        button.submit-btn {
+            margin-top: 22px;
+            width: 100%;
+            padding: 12px;
+            background: #4f7cff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button.submit-btn:hover {
+            background: #3f63d1;
+        }
+
+        /* Output box */
         #output {
             margin-top: 20px;
-            padding: 15px;
-            background: #f5f7ff;
-            border: 1px solid #cfd8ff;
-            border-radius: 5px;
+            padding: 20px;
+            background: #0f1117;
+            border-left: 4px solid #4f7cff;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin: 40px 0;
+            color: #6b7280;
+            font-size: 14px;
         }
     </style>
-    
 </head>
+
 <body>
-    <h2>Daily Meal Input</h2>
 
-    <form id="form">
-        <label>Where are you from and do you have any health problems?</label><br>
-        <input name="info" required><br><br>
+    <!-- Top Navigation -->
+    <div class="navbar">
+        <div class="nav-left">⭐ Nutrition Advisor</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+        </div>
+    </div>
 
-        <label>Breakfast:</label><br>
-        <input name="breakfast" required><br><br>
+    <!-- Hero text -->
+    <div class="hero">
+        <h1>Welcome to the Nutrition Advisor</h1>
+        <p>Enter your meals and get professional dietary feedback.</p>
+    </div>
 
-        <label>Lunch:</label><br>
-        <input name="lunch" required><br><br>
+    <!-- Form section -->
+    <div class="form-container">
 
-        <label>Dinner:</label><br>
-        <input name="dinner" required><br><br>
+        <form id="form">
+            <label>Where are you from and do you have any health problems?</label>
+            <input name="info" required>
 
-        <label>Snacks:</label><br>
-        <input name="snacks"><br><br>
+            <label>Breakfast</label>
+            <input name="breakfast" required>
 
-        <button type="submit">Submit</button>
-    </form>
+            <label>Lunch</label>
+            <input name="lunch" required>
 
-    <h3>Response:</h3>
-    <div id="output" style="white-space: pre-wrap;"></div>
+            <label>Dinner</label>
+            <input name="dinner" required>
+
+            <label>Snacks</label>
+            <input name="snacks">
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+        <div id="output"></div>
+    </div>
+
+    <footer>Nutrition Advisor — simple demo</footer>
 
     <script>
         document.getElementById("form").onsubmit = async function (e) {
