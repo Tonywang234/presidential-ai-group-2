@@ -1,12 +1,12 @@
 # backend.py
 from flask import Flask, request, render_template, jsonify
 from openai import OpenAI
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
 app = Flask(__name__)
 
-client = OpenAI(
-    api_key=""
-)
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 system_prompt = """
 You are a Professional nutritionist and you have to give clear advice to people's on diets. The person will tell you what they ate and you must clearly tell them a whats wrong with their diet and what could be improved.
