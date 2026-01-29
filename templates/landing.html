@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Presidential AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Optional: reuse your main CSS if you want -->
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 700px;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        a.button {
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s ease;
+        }
+
+        .primary {
+            background: white;
+            color: #203a43;
+        }
+
+        .primary:hover {
+            background: #e6e6e6;
+        }
+
+        .secondary {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .secondary:hover {
+            background: white;
+            color: #203a43;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Presidential AI</h1>
+        <p>
+            An AI-powered experience to explore presidential history,
+            leadership, and decision-making.
+        </p>
+
+        <div class="buttons">
+            <a href="/app" class="button primary">Enter App</a>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Presidential AI
+    </footer>
+
+</body>
+</html>
